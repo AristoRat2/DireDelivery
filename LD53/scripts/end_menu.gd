@@ -10,6 +10,7 @@ func _ready():
 		var t = $Story/Panel/RichTextLabel
 		t.text = '"So no cows? Darn"'
 		dialog = 3
+		CowTracker.cows = 0
 
 
 func next_dialog():

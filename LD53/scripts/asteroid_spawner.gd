@@ -19,14 +19,14 @@ func _ready():
 
 func _physics_process(delta):
 	$SpawnTimer.wait_time = lerp(game_manager.slowest_spawn_rate, game_manager.fastest_spawn_rate, game_manager.progress)
-	if game_manager.progress > 0.9 and planet_spawned == false:
+	if game_manager.progress > 0.95 and planet_spawned == false:
 		planet_spawned = true
 		$AnimationPlayer.play("MovePlanet")
 		
 
 
 func _on_Timer_timeout():
-	if game_manager.progress < 0.7:
+	if game_manager.progress < 0.9:
 		var new_ast 
 		var rand = round(rand_range(0, 3))
 		if rand == 0:
