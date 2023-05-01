@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sounds/Smash.ogg" type="AudioStream" id=1]
+[ext_resource path="res://scenes/HullBreakSound.gd" type="Script" id=2]
+
+[node name="HullBreakSound" type="AudioStreamPlayer2D"]
+stream = ExtResource( 1 )
+volume_db = 0.3
+autoplay = true
+script = ExtResource( 2 )

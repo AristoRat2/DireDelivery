@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/debris/ShipDebris.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/hull2.png" type="Texture" id=2]
+[ext_resource path="res://scripts/debris_type.gd" type="Script" id=3]
+[ext_resource path="res://scenes/debris/DestroyParent.gd" type="Script" id=4]
+
+[node name="HullDebris" type="Node2D"]
+
+[node name="ShipDebris" parent="." instance=ExtResource( 1 )]
+angular_velocity = 0.0
+script = ExtResource( 3 )
+debris_type = "hull"
+
+[node name="Icon" type="Sprite" parent="ShipDebris"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="DestroyParent" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+script = ExtResource( 4 )
+
+[connection signal="timeout" from="DestroyParent" to="DestroyParent" method="_on_DestroyParent_timeout"]

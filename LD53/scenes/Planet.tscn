@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://sprites/bovinae.png" type="Texture" id=1]
+
+[node name="Planet" type="RigidBody2D"]
+gravity_scale = 0.0
+can_sleep = false
+linear_velocity = Vector2( -1000, 0 )
+linear_damp = 1.0
+angular_damp = 0.0
+
+[node name="Icon" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )

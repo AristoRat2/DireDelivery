@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/player_control.gd" type="Script" id=1]
+[ext_resource path="res://scripts/ship_builder.gd" type="Script" id=2]
+[ext_resource path="res://scenes/blocks/Hull.tscn" type="PackedScene" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://scripts/ship_builder_start.gd" type="Script" id=5]
+[ext_resource path="res://scripts/build_button.gd" type="Script" id=6]
+[ext_resource path="res://scenes/blocks/Cow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/blocks/Turret.tscn" type="PackedScene" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[node name="ShipBuilder" type="Node2D"]
+script = ExtResource( 2 )
+hull = ExtResource( 3 )
+cow = ExtResource( 7 )
+turret = ExtResource( 8 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 0, 32 )
+points = PoolVector2Array( -288, 0, 288, 0 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2( 0, -32 )
+points = PoolVector2Array( -288, 0, 288, 0 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="RootBox" type="KinematicBody2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="Icon" type="Sprite" parent="RootBox"]
+self_modulate = Color( 0.415686, 0.305882, 0.0941176, 1 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RootBox"]
+shape = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Start" type="Button" parent="CanvasLayer/Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -400.0
+margin_top = -100.0
+rect_min_size = Vector2( 400, 100 )
+text = "Begin Delivery"
+script = ExtResource( 5 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -400.0
+margin_bottom = 400.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel/ScrollContainer"]
+margin_right = 400.0
+margin_bottom = 308.0
+
+[node name="HullButton" type="Button" parent="CanvasLayer/Control/Panel/ScrollContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 400, 100 )
+toggle_mode = true
+pressed = true
+text = "Hull"
+script = ExtResource( 6 )
+
+[node name="CowButton" type="Button" parent="CanvasLayer/Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 400.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 400, 100 )
+toggle_mode = true
+text = "Cow"
+script = ExtResource( 6 )
+id = 1
+
+[node name="TurretButton" type="Button" parent="CanvasLayer/Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 208.0
+margin_right = 400.0
+margin_bottom = 308.0
+rect_min_size = Vector2( 400, 100 )
+toggle_mode = true
+text = "Turret"
+script = ExtResource( 6 )
+id = 2
+
+[connection signal="pressed" from="CanvasLayer/Control/Start" to="CanvasLayer/Control/Start" method="_on_Start_pressed"]

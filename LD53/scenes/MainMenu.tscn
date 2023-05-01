@@ -1,0 +1,293 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Neucha/Neucha-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://moving_background.gd" type="Script" id=2]
+[ext_resource path="res://sprites/space.png" type="Texture" id=3]
+[ext_resource path="res://new_theme.tres" type="Theme" id=4]
+[ext_resource path="res://sprites/cowman.png" type="Texture" id=5]
+[ext_resource path="res://scripts/start_menu.gd" type="Script" id=6]
+[ext_resource path="res://sounds/MainMenu.ogg" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 120
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 0.890196, 0, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.870588, 0.654902, 0, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.196078, 0.25098, 0.34902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 30
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=12]
+default_font = SubResource( 11 )
+Button/styles/hover = SubResource( 6 )
+Button/styles/normal = SubResource( 7 )
+Button/styles/pressed = SubResource( 8 )
+ProgressBar/styles/bg = SubResource( 9 )
+ProgressBar/styles/fg = SubResource( 10 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Story:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Story:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Story:rect_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 1080 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "ScrollIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Story:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1200 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Story:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Story:rect_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 1080 ) ]
+}
+
+[node name="Control" type="Node"]
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Space" type="Sprite" parent="Background"]
+texture = ExtResource( 3 )
+
+[node name="Space2" type="Sprite" parent="Background"]
+position = Vector2( -1920, 0 )
+texture = ExtResource( 3 )
+
+[node name="Space3" type="Sprite" parent="Background"]
+position = Vector2( 1920, 0 )
+texture = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+
+[node name="Main" type="Control" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Main"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -330.0
+margin_top = -244.0
+margin_right = 330.0
+margin_bottom = -74.0
+theme = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]Dire Delivery"
+text = "Dire Delivery"
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/Main"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.5
+margin_top = -40.5
+margin_right = 140.5
+margin_bottom = 40.5
+theme = ExtResource( 4 )
+text = "Play"
+
+[node name="Story" type="Control" parent="CanvasLayer/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/Story"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -701.0
+margin_top = -367.0
+margin_right = 56.0
+margin_bottom = 409.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Story/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+theme = ExtResource( 4 )
+text = "\"A few hours ago our cow freighter the 'Milkiest Way' was lost in an accident. All lives were lost. Fortunately though the cows it was transporting were conveniently wearing space suits. You're the only delivery person we could find. Please collect as many cows as you can. At least one MUST reach the planet Bovinae. The galaxy is depending on you. Good luck.\""
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control/Story/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -144.5
+margin_top = 250.0
+margin_right = 136.5
+margin_bottom = 331.0
+theme = ExtResource( 4 )
+text = "Begin Delivery"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Story"]
+margin_left = 906.0
+margin_top = 301.0
+margin_right = 1740.0
+margin_bottom = 1101.0
+texture = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Story"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -658.0
+margin_top = -506.0
+margin_right = 726.0
+margin_bottom = -336.0
+theme = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]< Incoming Transmission> "
+text = "< Incoming Transmission> "
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/Control/Story"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1100.0
+margin_top = 188.0
+margin_right = -127.0
+margin_bottom = -38.0
+theme = SubResource( 12 )
+text = "Controls: 
+W or Up Arrow: Up
+S or Down Arrow: Down
+Touch Hull Or Cows to Add to Ship. Avoid asteroids!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control"]
+anims/RESET = SubResource( 3 )
+anims/ScrollIn = SubResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 0.3
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/Control/Main/Button" to="CanvasLayer/Control" method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Story/Panel/StartButton" to="CanvasLayer/Control" method="_on_StartButton_pressed"]
